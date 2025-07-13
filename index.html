@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Result Screenshot Automation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+            text-align: center;
+        }
+        h2 {
+            color: #007bff;
+        }
+        textarea {
+            width: 80%;
+            max-width: 500px;
+            height: 200px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 30px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .screenshot-container {
+            margin-top: 40px;
+        }
+        .screenshot-item {
+            margin: 20px auto;
+            max-width: 80%;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .screenshot-item img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        a.download-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a.download-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>🎓 Enter Roll Numbers (One per line)</h2>
+    <form action="/run" method="POST">
+        <textarea name="rolls" placeholder="Example:
+525206
+525207" required></textarea><br />
+        <button type="submit">📸 Generate Screenshots</button>
+    </form>
+
+    {% if screenshots %}
+        <div class="screenshot-container">
+            <h3>🖼️ Generated Screenshots</h3>
+            {% for shot in screenshots %}
+                <div class="screenshot-item">
+                    <p><strong>{{ shot }}</strong></p>
+                    <img src="{{ shot }}" alt="screenshot" />
+                    <br />
+                    <a class="download-link" href="{{ shot }}" download>⬇️ Download</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</body>
+</html>
